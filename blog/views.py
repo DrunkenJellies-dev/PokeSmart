@@ -4,8 +4,20 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from .models import Post, Comment
 from .forms import CommentForm
+from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+
+@login_required
+def user_profile(request):
+    user = request.user
+    comments = Comment.objects.filter(author=user).order_by('-created_on')
+    return render(request, 'blog/user_profile.html', {
+        'user': user,
+        'comments': comments,
+    })
+
 class PostList(generic.ListView):
     queryset = Post.objects.filter(status=1)
     template_name = "blog/index.html"
