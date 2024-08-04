@@ -1,4 +1,7 @@
-{% extends 'base.html' %} {% block content %} {% load static %} {% load crispy_forms_tags %}
+{% extends 'base.html' %} 
+{% block content %}
+{% load static %}
+{% load crispy_forms_tags %}
 
 <div class="masthead">
   <div class="container">
@@ -96,6 +99,28 @@
       </div>
     </div>
   </div>
+
+  <!-- Social Sharing and Copy Link -->
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Share this post:</h3>
+      <div class="social-sharing">
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank" class="btn btn-facebook">
+          <i class="fab fa-facebook-f"></i> Share on Facebook
+        </a>
+        <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ post.title }}" target="_blank" class="btn btn-twitter">
+          <i class="fab fa-twitter"></i> Share on Twitter
+        </a>
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ post.title }}" target="_blank" class="btn btn-linkedin">
+          <i class="fab fa-linkedin-in"></i> Share on LinkedIn
+        </a>
+        <button id="copyLink" class="btn btn-copy">
+          <i class="fas fa-copy"></i> Copy Link
+        </button>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <!-- Delete confirmation modal -->
@@ -122,4 +147,5 @@
 {% block extras %}
 <script src="{% static 'js/comments.js' %}"></script>
 <script src="{% static 'js/likeDislike.js' %}"></script>
+<script src="{% static 'js/social.js' %}"></script>
 {% endblock %}
