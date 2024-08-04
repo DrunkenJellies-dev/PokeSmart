@@ -11,7 +11,6 @@ class PostList(generic.ListView):
     template_name = "blog/index.html"
     paginate_by = 6
 
-
 def post_detail(request, slug):
     queryset = Post.objects.filter(status=1)
     post = get_object_or_404(queryset, slug=slug)
@@ -19,9 +18,7 @@ def post_detail(request, slug):
     comment_count = post.comments.filter(approved=True).count()
 
     if request.method == "POST":
-        print("Received a POST request")
         comment_form = CommentForm(data=request.POST)
-        print("About to render comment template")
         if comment_form.is_valid():
             comment = comment_form.save(commit=False)
             comment.author = request.user
@@ -34,22 +31,18 @@ def post_detail(request, slug):
 
     comment_form = CommentForm()
     return render(
-    request,
-    "blog/post_detail.html",
-    {
-        "post": post,
-        "comments": comments,
-        "comment_count": comment_count,
-        "comment_form": comment_form,
-    },
-)
+        request,
+        "blog/post_detail.html",
+        {
+            "post": post,
+            "comments": comments,
+            "comment_count": comment_count,
+            "comment_form": comment_form,
+        },
+    )
 
 def comment_edit(request, slug, comment_id):
-    """
-    view to edit comments
-    """
     if request.method == "POST":
-
         queryset = Post.objects.filter(status=1)
         post = get_object_or_404(queryset, slug=slug)
         comment = get_object_or_404(Comment, pk=comment_id)
@@ -67,9 +60,6 @@ def comment_edit(request, slug, comment_id):
     return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 def comment_delete(request, slug, comment_id):
-    """
-    view to delete comment
-    """
     queryset = Post.objects.filter(status=1)
     post = get_object_or_404(queryset, slug=slug)
     comment = get_object_or_404(Comment, pk=comment_id)
@@ -80,4 +70,24 @@ def comment_delete(request, slug, comment_id):
     else:
         messages.add_message(request, messages.ERROR, 'You can only delete your own comments!')
 
+    return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+
+def post_like(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    if post.likes.filter(id=request.user.id).exists():
+        post.likes.remove(request.user)
+    else:
+        post.likes.add(request.user)
+        if post.dislikes.filter(id=request.user.id).exists():
+            post.dislikes.remove(request.user)
+    return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+
+def post_dislike(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    if post.dislikes.filter(id=request.user.id).exists():
+        post.dislikes.remove(request.user)
+    else:
+        post.dislikes.add(request.user)
+        if post.likes.filter(id=request.user.id).exists():
+            post.likes.remove(request.user)
     return HttpResponseRedirect(reverse('post_detail', args=[slug]))
