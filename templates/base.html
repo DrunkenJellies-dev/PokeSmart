@@ -64,7 +64,7 @@
                       </li>
                       <li class="nav-item">
                           <a class="nav-link" href="{% url 'user_profile' %}" title="Profile">
-                              <span class="user-icon">{{ user.username|slice:":1"|upper }}</span>
+                              <span class="profile-header">{{ user.username|upper }}</span>
                           </a>
                       </li>
                   {% else %}
@@ -77,10 +77,6 @@
                   {% endif %}
 
               </ul>
-              
-              <span class="navbar-text text-muted">
-                  adventures of a Pokemon Trainer
-              </span>
               <button id="theme-toggle" class="btn">
                 <i class="fas fa-moon"></i>
             </button>

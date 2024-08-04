@@ -4,32 +4,37 @@
 {% block content %}
 
 <div class="container mt-5">
-  <div class="row">
+  <div class="row mb-4">
     <div class="col-12 col-md-4 text-center">
-      <img src="{% static 'images/nobody.jpg' %}" width="75%" />
+      <img src="{% static 'images/about_us.png' %}" class="img-fluid rounded-circle" alt="Profile Image" />
     </div>
     <div class="col-12 col-md-8">
-      <h2>{{ about.title }}</h2>
-      {{ about.content | safe }}
+      <h2 class="text-purple">{{ about.title }}</h2>
+      <div class="content-text">
+        {{ about.content | safe }}
+      </div>
     </div>
   </div>
-  <div class="row">
+  
+  <div class="row mb-4">
     <div class="col text-right">
-      <p class="text-end"><em>Updated on: {{ about.updated_on }}</em></p>
+      <p class="text-muted"><em>Updated on: {{ about.updated_on }}</em></p>
     </div>
   </div>
+
   <div class="row justify-content-center">
-    <div class="col-12 col-md-6 my-5">
-      <h2>Contact Us</h2>
+    <div class="col-12 col-md-8 my-5">
+      <h2 class="text-purple">Contact Us</h2>
       <p>
-        Reach out and we can collaborate.
+        We'd love to hear from you. Whether you have questions or want to collaborate, feel free to reach out!
       </p>
 
       <form method="post">
         {{ collaborate_form | crispy }} {% csrf_token %}
-        <button class="btn btn-secondary" type="submit">Submit</button>
+        <button class="btn btn-primary" type="submit">Submit</button>
       </form>
     </div>
   </div>
 </div>
+
 {% endblock content %}
