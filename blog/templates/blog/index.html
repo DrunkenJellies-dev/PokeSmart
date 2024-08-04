@@ -1,26 +1,24 @@
-{% extends "base.html" %} 
+{% extends "base.html" %}
 {% block content %}
 
-<!-- index.html content starts here -->
 <div class="container-fluid">
   <div class="row">
     <!-- Blog Entries Column -->
-    <div class="col-12 mt-3 left">
+    <div class="col-12 mt-3">
       <div class="row">
         {% for post in post_list %}
-        <div class="col-md-4">
-          <div class="card mb-4">
+        <div class="col-md-4 mb-4">
+          <div class="card shadow-sm border-light">
             <div class="card-body">
-              <div class="image-container">
+              <div class="image-container mb-3">
                 <div class="image-flash">
                   <p class="author">Author: {{ post.author }}</p>
                 </div>
               </div>
-              <a href="{% url 'post_detail' post.slug %}" class="post-link">
-                <h2 class="card-title">{{ post.title }}</h2>
-                <p class="card-text">{{ post.excerpt }}</p>
+              <a href="{% url 'post_detail' post.slug %}" class="text-decoration-none">
+                <h2 class="card-title mb-2">{{ post.title }}</h2>
+                <p class="card-text text-muted">{{ post.excerpt }}</p>
               </a>
-
               <hr />
               <p class="card-text text-muted h6">{{ post.created_on }}</p>
             </div>
@@ -53,11 +51,10 @@
   {% endif %}
 </div>
 
-<!-- index.html content ends here -->
-{% endblock %} 
+{% endblock %}
 
-{% block copyright %} 
-  <div class="footer-text">
-    <p>Copyright 2024 Callum Newman</p>
+{% block copyright %}
+  <div class="footer-text text-center py-3">
+    <p>&copy; 2024 Callum Newman</p>
   </div>
 {% endblock %}

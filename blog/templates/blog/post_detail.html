@@ -1,39 +1,32 @@
-{% extends 'base.html' %} 
-{% block content %}
+{% extends "base.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
 
-<div class="masthead">
-  <div class="container">
+{% block content %}
+<div class="masthead py-5">
+  <div class="container text-white">
     <div class="row g-0">
       <div class="col-md-6 masthead-text">
-        <h1 class="post-title">{{ post.title }}</h1>
-        <p class="post-subtitle">{{ post.author }} | {{ post.created_on }}</p>
-      </div>
-      <div class="d-none d-md-block col-md-6 masthead-image">
-        <img
-          src="{% static 'images/default.jpg' %}"
-          class="scale"
-          alt="placeholder"
-        />
+        <h1 class="display-4">{{ post.title }}</h1>
+        <p class="lead">{{ post.author }} | {{ post.created_on }}</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="container">
+<div class="container mt-4">
   <div class="row">
-    <div class="col card mb-4 mt-3 left top">
+    <div class="col card mb-4">
       <div class="card-body">
         <p class="card-text">{{ post.content | safe }}</p>
-        <div class="post-actions">
+        <div class="post-actions mt-3">
           <form action="{% url 'post_like' post.slug %}" method="POST" class="d-inline">
             {% csrf_token %}
             <button type="submit" class="btn btn-primary">
               <i class="fas fa-thumbs-up"></i> Like ({{ post.likes.count }})
             </button>
           </form>
-          <form action="{% url 'post_dislike' post.slug %}" method="POST" class="d-inline">
+          <form action="{% url 'post_dislike' post.slug %}" method="POST" class="d-inline ms-2">
             {% csrf_token %}
             <button type="submit" class="btn btn-secondary">
               <i class="fas fa-thumbs-down"></i> Dislike ({{ post.dislikes.count }})
@@ -43,9 +36,10 @@
       </div>
     </div>
   </div>
+  
   <!-- Displaying count of comments -->
   <div class="row">
-    <div class="col-12">
+    <div class="col-12 mb-3">
       <strong class="text-secondary">
         <i class="far fa-comments"></i> {{ comment_count }}
       </strong>
@@ -54,48 +48,52 @@
       <hr />
     </div>
   </div>
+
   <!-- Displaying Comments -->
   <div class="row">
-    <div class="col-md-8 card mb-4 mt-3">
-      <h3>Comments:</h3>
-      <div class="card-body">
-        {% for comment in comments %}
-        <div
-          class="p-2 comments {% if not comment.approved and comment.author == user %} faded{% elif not comment.approved %} d-none{% endif %}"
-        >
-          <p class="font-weight-bold">
-            {{ comment.author }}
-            <span class="font-weight-normal"> {{ comment.created_on }} </span>
-            wrote:
-          </p>
-          <div id="comment{{ comment.id }}">
-            {{ comment.body | linebreaks }}
+    <div class="col-md-8">
+      <div class="card mb-4">
+        <h3 class="card-header">Comments:</h3>
+        <div class="card-body">
+          {% for comment in comments %}
+          <div class="p-2 comments {% if not comment.approved and comment.author == user %} faded{% elif not comment.approved %} d-none{% endif %}">
+            <p class="font-weight-bold">
+              {{ comment.author }}
+              <span class="font-weight-normal"> {{ comment.created_on }} </span>
+              wrote:
+            </p>
+            <div id="comment{{ comment.id }}">
+              {{ comment.body | linebreaks }}
+            </div>
+            {% if not comment.approved and comment.author == user %}
+            <p class="approval">This comment is awaiting approval</p>
+            {% endif %}
+            {% if user.is_authenticated and comment.author == user %}
+            <button class="btn btn-danger" comment_id="{{ comment.id }}" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
+            <button class="btn btn-warning" comment_id="{{ comment.id }}">Edit</button>
+            {% endif %}
           </div>
-          {% if not comment.approved and comment.author == user %}
-          <p class="approval">This comment is awaiting approval</p>
-          {% endif %}
-          {% if user.is_authenticated and comment.author == user %}
-          <button class="btn btn-delete" comment_id="{{ comment.id }}">Delete</button>
-          <button class="btn btn-edit" comment_id="{{ comment.id }}">Edit</button>
-          {% endif %}
+          {% endfor %}
         </div>
-        {% endfor %}
       </div>
     </div>
+
     <!-- Creating New Comments -->
-    <div class="col-md-4 card mb-4 mt-3">
-      <div class="card-body">
-        {% if user.is_authenticated %}
-        <h3>Leave a comment:</h3>
-        <p>Posting as: {{ user.username }}</p>
-        <form id="commentForm" method="post" style="margin-top: 1.3em;">
-          {{ comment_form | crispy }}
-          {% csrf_token %}
-          <button id="submitButton" type="submit" class="btn btn-signup btn-lg">Submit</button>
-        </form>
-        {% else %}
-        <p>Log in to leave a comment</p>
-        {% endif %}
+    <div class="col-md-4">
+      <div class="card mb-4">
+        <div class="card-body">
+          {% if user.is_authenticated %}
+          <h3>Leave a comment:</h3>
+          <p>Posting as: {{ user.username }}</p>
+          <form id="commentForm" method="post" style="margin-top: 1.3em;">
+            {{ comment_form | crispy }}
+            {% csrf_token %}
+            <button id="submitButton" type="submit" class="btn btn-primary btn-lg">Submit</button>
+          </form>
+          {% else %}
+          <p>Log in to leave a comment</p>
+          {% endif %}
+        </div>
       </div>
     </div>
   </div>
@@ -114,13 +112,12 @@
         <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ post.title }}" target="_blank" class="btn btn-linkedin">
           <i class="fab fa-linkedin-in"></i> Share on LinkedIn
         </a>
-        <button id="copyLink" class="btn btn-copy">
+        <button id="copyLink" class="btn btn-purple copy-link-button">
           <i class="fas fa-copy"></i> Copy Link
         </button>
       </div>
     </div>
   </div>
-
 </div>
 
 <!-- Delete confirmation modal -->
@@ -142,7 +139,7 @@
   </div>
 </div>
 
-{% endblock content %}
+{% endblock %}
 
 {% block extras %}
 <script src="{% static 'js/comments.js' %}"></script>

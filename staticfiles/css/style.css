@@ -9,6 +9,8 @@ body {
 :root {
     --accent-color: #6f42c1; /* Bright purple */
     --accent-light: #9b59b6; /* Lighter shade of purple for hover effects */
+    --copy-link-bg-dark: #3e3e3e; /* Dark gray background for copy link in dark mode */
+    --copy-link-text-dark: #e0e0e0; /* Light text color for copy link in dark mode */
 }
 
 /* Navbar styles */
@@ -97,9 +99,14 @@ body {
 }
 
 .card-title {
+    color: var(--accent-color); /* Purple color */
     margin-bottom: 1rem;
     font-size: 1.25rem;
     font-weight: 700;
+}
+
+.card-title:hover {
+    color: var(--accent-light); /* Light purple color on hover */
 }
 
 .card-text {
@@ -126,6 +133,7 @@ body {
 
 /* Profile page styling */
 .profile-header {
+    position: relative;
     margin-bottom: 30px;
     text-align: center;
 }
@@ -133,6 +141,19 @@ body {
 .profile-header img {
     border-radius: 50%;
     border: 3px solid var(--accent-color);
+}
+
+.profile-header::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -20px; /* Adjust based on your layout */
+    width: 80px; /* Circle size */
+    height: 80px; /* Circle size */
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    z-index: -1;
 }
 
 .profile-header h1 {
@@ -170,24 +191,28 @@ body {
     height: 40px;
     border: 2px solid var(--accent-color);
     border-radius: 50%;
-    background-color: #fff;
-    color: var(--accent-color);
+    background-color: var(--accent-color); /* Default background color */
+    color: #fff; /* Default text color */
     font-size: 1.25rem;
     transition: background-color 0.3s, color 0.3s, border-color 0.3s;
     text-decoration: none;
     line-height: 1;
-    margin: 0 10px;
+    margin: 0 5px; /* Adjust margin */
 }
 
 .page-link:hover,
 .page-link:focus {
-    background-color: var(--accent-color);
-    color: #fff;
-    border-color: var(--accent-color);
+    background-color: var(--accent-light); /* Hover background color */
+    color: #fff; /* Hover text color */
+    border-color: var(--accent-light); /* Hover border color */
 }
 
-.page-item {
-    margin: 0 5px;
+.page-item:first-child .page-link {
+    border-radius: 50% 0 0 50%; /* Curved on the right side for previous */
+}
+
+.page-item:last-child .page-link {
+    border-radius: 0 50% 50% 0; /* Curved on the left side for next */
 }
 
 /* Font Awesome icons styling */
@@ -224,7 +249,7 @@ body.light-mode .footer a {
 
 /* Dark mode styles */
 body.dark-mode {
-    background-color: #121212;
+    background-color: #1a1a1a; /* Slightly lighter than pure black */
     color: #e0e0e0;
 }
 
@@ -255,19 +280,42 @@ body.dark-mode .footer a:hover {
 }
 
 body.dark-mode .card {
-    background-color: #1e1e1e;
+    background-color: #2a2a2a; /* Slightly lighter than pure black */
     color: #e0e0e0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 body.dark-mode .list-group-item {
-    background-color: #1e1e1e;
+    background-color: #2a2a2a; /* Consistent with card background */
     color: #e0e0e0;
-    border-color: #444;
+    border-color: #555; /* Lighter border color */
 }
 
 body.dark-mode .list-group-item:hover {
-    background-color: #333333;
+    background-color: #333333; /* Slightly lighter hover background */
+}
+
+/* Dark mode styles for share icons */
+body.dark-mode .social-sharing a {
+    color: #e0e0e0; /* Ensure icons are visible */
+}
+
+body.dark-mode .social-sharing a:hover {
+    color: var(--accent-light); /* Change color on hover */
+}
+
+/* Copy link button */
+.copy-link-button {
+    background-color: var(--copy-link-bg-dark); /* Dark gray background */
+    color: var(--copy-link-text-dark); /* Light text color */
+    border: 1px solid var(--copy-link-bg-dark); /* Dark gray border */
+}
+
+.copy-link-button:hover,
+.copy-link-button:focus {
+    background-color: #555; /* Slightly lighter gray on hover */
+    color: #fff; /* Light text color on hover */
+    border-color: #555; /* Matching border color */
 }
 
 /* Theme toggle button */
