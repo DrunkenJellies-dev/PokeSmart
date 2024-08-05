@@ -1,3 +1,4 @@
+
 # PokeSmart
 
 **Developer:** Callum Newman
@@ -13,10 +14,6 @@
 Welcome to PokéSmart!
 
 At PokéSmart, we aim to be more than just a hub for Pokémon news - although of course, our updates are always hot off the press! - we’re the center of the Poké community! Improve your game, stay up-to-date with the latest trends, and reach out to share your thoughts with the community.
-
-Thank you for visiting PokéMasters Blog. We hope you find something that sparks your interest and enriches your Pokémon journey.
-
-Feel free to reach out to us with any questions, suggestions, or just to share your Pokémon adventures. We’re always excited to hear from our readers!
 
 ## Table of Contents
 
@@ -43,8 +40,8 @@ Feel free to reach out to us with any questions, suggestions, or just to share y
 ## Key Project Goals
 
 1. **To Share Pokémon Content:** Provide a space for users to view and discuss Pokémon-related blog posts.
-2. **To Build a Community:** Foster interaction through comments and user profiles.
-3. **To Encourage User Interaction:** Allow users to comment on posts and view their own profiles.
+2. **To Build a Community:** Foster interaction through comments, likes, dislikes, and user profiles.
+3. **To Encourage User Interaction:** Allow users to comment, like, dislike and share posts and view their own profiles.
 4. **To Provide a User-Friendly Experience:** Ensure easy navigation and accessibility across devices.
 
 ## Target Audience
@@ -56,96 +53,123 @@ Feel free to reach out to us with any questions, suggestions, or just to share y
 ## User Requirements and Expectations
 
 - **Content Access:** Users expect to view detailed blog posts about Pokémon.
-- **Interactive Features:** Users want to comment on posts and manage their profiles.
-- **Community Engagement:** Users anticipate interacting with other fans and sharing their own content.
+- **Interactive Features:** Users want to comment, like and share posts and manage their profiles.
+- **Community Engagement:** Users anticipate interacting with other fans and sharing their own content - collaboartion is fostered through contact forms.
 
 ## Features
 
 #### Navigation Bar
+
 ![Navigation Bar](/readme_imgs/Features/NavigationBar.png)
 
 #### Blog Card
+
 ![Blog Card](/readme_imgs/Features/BlogCard.png)
 
 #### Comment Form
+
 ![Comment Form](/readme_imgs/Features/CommentForm.png)
 
 #### Comment History
+
 ![Comment History](/readme_imgs/Features/CommentHistory.png)
 
 #### Contact Us Form
+
 ![Contact Us Form](/readme_imgs/Features/ContactUsForm.png)
 
 #### Footer
+
 ![Footer](/readme_imgs/Features/Footer.png)
 
 #### Likes / Dislikes
+
 ![Likes and Dislikes](/readme_imgs/Features/LikeDislikeButtons.png)
 
 #### Prev and Next Buttons
+
 ![Prev and Next Buttons](/readme_imgs/Features/PrevNextButtons.png)
 
 #### Share Posts
+
 ![Share Posts](/readme_imgs/Features/SharePosts.png)
 
 ## Design
 
 #### Colour Design
+
 Use of vibrant colors related to Pokémon.
 ![Dark Mode](/readme_imgs/SiteScreenshots/DarkModePage1.png)
 ![Light Mode](/readme_imgs/SiteScreenshots/Lightmode.png)
 
 #### About Page
+
 ![About Page](/readme_imgs/SiteScreenshots/AboutPage.png)
 
 #### Blog Page
+
 ![Blog Page](/readme_imgs/SiteScreenshots/BlogPost.png)
 
-#### Contact Us Page 
+#### Contact Us Page
+
 ![Contact Us Page](/readme_imgs/SiteScreenshots/ContactUsForm.png)
 
 #### Second Page of Blogs
+
 ![SecondPageBlogs](/readme_imgs/SiteScreenshots/Page2.png)
 
 #### Post Comment Section
+
 ![Post Comment Section](/readme_imgs/SiteScreenshots/PostCommentSection.png)
 
 #### Profile Comment History
+
 ![Profile Comment History](/readme_imgs/SiteScreenshots/ProfileCommentHistory.png)
 
 #### Signed In
+
 ![SignedIn](/readme_imgs/SiteScreenshots/SignedIn.png)
 
 #### Sign In
+
 ![Sign In](/readme_imgs/SiteScreenshots/SignIn.png)
 
 #### Sign Out
+
 ![Sign Out](/readme_imgs/SiteScreenshots/SignOut.png)
 
 #### Sign Up Page
+
 ![Sign Up Page](/readme_imgs/SiteScreenshots/SignUpPage.png)
 
 ## Database Schema
 
 #### About Content
+
 ![About Content](/readme_imgs/Admin/AboutContent.png)
 
 #### Admin Home
+
 ![Admin Home](/readme_imgs/Admin/AdminHome.png)
 
 #### Collaberation Requests
+
 ![Collaberation Requests](/readme_imgs/Admin/CollaberationReqests.png)
 
 #### Comments
+
 ![Comments](/readme_imgs/Admin/Comments.png)
 
 #### Posts
+
 ![Posts](/readme_imgs/Admin/Posts.png)
 
 #### Recent Actions
+
 ![Recent Actions](/readme_imgs/Admin/RecentActions.png)
 
 #### Users
+
 ![Users](/readme_imgs/Admin/Users.png)
 
 ## Testing:
@@ -260,7 +284,7 @@ All pages on the website were tested for responsiveness across multiple devices.
 | Action                     | Notifications and feedback for signin and out | Does it work as expected? |
 | -------------------------- | --------------------------------------------- | ------------------------- |
 | Navigation menu links work | Successfully navigated to desired page.       | PASS                      |
-| Contact me button clicked  | Navigate to contact me form                   | PASS                      |
+| Contact button clicked     | Navigate to Contact form                      | PASS                      |
 | Contact form completed     | User receives a success message               | PASS                      |
 
 ### Notification and feedback testing for social media links
@@ -282,8 +306,8 @@ All pages on the website were tested for responsiveness across multiple devices.
 
 ### Pre deployment
 
-- To ensure successful deployment with heroku, it's good practice to make sure that the requirements.txt file is kept up to date so as that imported python modules are configured correctly.
-- A Procfile is required to allow heroku deployment to be configured to a gunicorn web app.
+- To ensure successful deployment with Heroku, it's good practice to make sure that the requirements.txt file is kept up to date so as that imported python modules are configured correctly.
+- A Procfile is required to allow Heroku deployment to be configured to a gunicorn web app.
 - In settings.py configure the ALLOWED_HOSTS list the format ['app_name.heroku.com', 'localhost'], make sure all static files and directories are configured correctly.
 - All environment variables on the env.py which gitignored on the repo must be configured correctly with the database url and secret key.
 
