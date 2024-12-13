@@ -26,6 +26,11 @@ class PostList(generic.ListView):
 def post_detail(request, slug):
     queryset = Post.objects.filter(status=1)
     post = get_object_or_404(queryset, slug=slug)
+    
+    # Increment the view count by 1
+    post.view_count += 1
+    post.save()
+
     comments = post.comments.all().order_by("-created_on")
     comment_count = post.comments.filter(approved=True).count()
 

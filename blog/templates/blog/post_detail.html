@@ -19,6 +19,8 @@
     <div class="col card mb-4">
       <div class="card-body">
         <p class="card-text">{{ post.content | safe }}</p>
+        <p>Views: {{ post.view_count }}</p>
+
         <div class="tags mt-3">
           <h5>Tags:</h5>
           {% for tag in post.tags.all %}
