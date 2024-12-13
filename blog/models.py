@@ -24,6 +24,7 @@ class Post(models.Model):
     excerpt = models.TextField(blank=True)
     likes = models.ManyToManyField(User, related_name='post_likes', blank=True)
     dislikes = models.ManyToManyField(User, related_name='post_dislikes', blank=True)
+    view_count = models.PositiveIntegerField(default=0)
     tags = models.ManyToManyField(Tag, related_name="posts", blank=True)
 
     class Meta:
