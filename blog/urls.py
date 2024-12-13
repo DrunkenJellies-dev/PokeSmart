@@ -13,4 +13,5 @@ urlpatterns = [
         views.post_like, name='post_like'),
     path('<slug:slug>/dislike/', 
         views.post_dislike, name='post_dislike'),
+    path("tag/<slug:slug>/", views.tag_posts, name="tag_posts"),
 ]

@@ -19,6 +19,16 @@
     <div class="col card mb-4">
       <div class="card-body">
         <p class="card-text">{{ post.content | safe }}</p>
+        <div class="tags mt-3">
+          <h5>Tags:</h5>
+          {% for tag in post.tags.all %}
+          {% comment %} <a href="{% url 'tag_posts' tag.slug %}" class="badge bg-secondary">{{ tag.name }}</a> {% endcomment %}
+          <p class="badge bg-secondary">{{ tag.name }}</p>
+          {% empty %}
+            <p>No tags available.</p>
+          {% endfor %}
+        </div>
+        
         <div class="post-actions mt-3">
           <form action="{% url 'post_like' post.slug %}" method="POST" class="d-inline">
             {% csrf_token %}

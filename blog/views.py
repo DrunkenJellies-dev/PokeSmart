@@ -103,3 +103,9 @@ def post_dislike(request, slug):
         if post.likes.filter(id=request.user.id).exists():
             post.likes.remove(request.user)
     return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+
+def tag_posts(request, slug):
+    tag = get_object_or_404(Tag, slug=slug)
+    posts = Post.objects.filter(tags=tag, status=1)
+    #return HttpResponseRedirect(reverse('tag_posts', {"tag": tag, "posts": posts}))
+    return render(request, "blog/tag_posts.html", {"tag": tag, "posts": posts})
